@@ -4,10 +4,10 @@ import { Cards, Chart, CountryPicker } from './components';
 
 import { fetchData } from './api';
 
-import coronaImage from './images/image.png';
 import styles from './App.module.css';
 
 const App = () => {
+	const [stayAtHome, setStayAtHome] = useState(true);
 	const [data, setData] = useState({});
 	const [country, setCountry] = useState('');
 	useEffect(() => {
@@ -27,10 +27,20 @@ const App = () => {
 
 	return (
 		<div className={styles.container}>
-			<img src={coronaImage} className={styles.image} alt="COVID-19" />
 			<div className={styles.updatedTime}>
 				Updated: {new Date(data.updated).toDateString()}
 			</div>
+			<h1>Is Stay at Home Over?</h1>
+			<div className={styles.loriContainer}>
+				<h2>NO!</h2>
+			</div>
+			<p className={styles.visit}>
+				Please visit:{' '}
+				<a href="https://www.worldometers.info/coronavirus/">
+					worldometers/corona
+				</a>{' '}
+				for up to date stats
+			</p>
 			<Cards {...data} />
 			<CountryPicker handleCountryChange={handleCountryChange} />
 			<Chart {...data} country={country} />
